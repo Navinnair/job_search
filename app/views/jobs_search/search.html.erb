@@ -1,0 +1,9 @@
+<%= form_tag({}, {method: :get, class: 'search-job'}) do %>
+  <%= text_field_tag :query, params[:query], placeholder: 'Search with Job name' %>
+  <%= submit_tag('Search') %>
+<% end %>
+
+<div id="channel-id" channel-data="<%= @channel_id %>">
+</div>
+
+<div id="<%= @channel_id %>"></div>
