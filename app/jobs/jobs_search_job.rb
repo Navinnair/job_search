@@ -16,7 +16,11 @@ class JobsSearchJob < ApplicationJob
     StackoverflowJobsService.call(query)
   end
 
+  # if the cache present server from cache otherwise
+  # fetch the data using api service
   def render(query)
-    JobListSerializer.render_as_json(job_list(query))
+    Rails.cache.fetch(query, expires_in: 5.minutes) do
+      JobListSerializer.render_as_json(job_list(query))
+    end  
   end
 end
