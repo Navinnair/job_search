@@ -15,6 +15,11 @@ document.addEventListener('turbolinks:load', () => {
 
       received(data) {
         // Called when there's incoming data on the websocket for this channel  
+
+        // remove loading text
+        while(element.firstChild && element.removeChild(element.firstChild));
+
+        // result data to array to build table
         var main_array = new Array();
         for (var key in data.item) {
           var array_values = new Array();
@@ -24,8 +29,14 @@ document.addEventListener('turbolinks:load', () => {
           main_array.push(array_values)
         }
         
+        // is array is empty render no results found
+        if (Array.isArray(main_array) && !main_array.length){
+          var main_array = [['No Results Found']];
+        }
+
         createTable(main_array);
         
+        // create table structure
         function createTable(tableData) {
           var table = document.createElement('table');
           var tableBody = document.createElement('tbody');
@@ -43,7 +54,7 @@ document.addEventListener('turbolinks:load', () => {
           });
         
           table.appendChild(tableBody);
-          document.body.appendChild(table);
+          element.appendChild(table);
         }
       }
     });
