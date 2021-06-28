@@ -1,18 +1,14 @@
 <%= form_with(method: :get, id: 'search-job', local: false) do %>
   <%= text_field_tag :query, params[:query], placeholder: 'Search with Job name' %>
   <%= hidden_field_tag :channel_id, @channel_id %>
-  <%= submit_tag('Search') %>
+  <%= submit_tag('Search', id: 'search_button') %>
 <% end %>
 
 <div id="channel-id" channel-data="<%= @channel_id %>">
 </div>
 
 <script type="text/javascript">
-  window.addEventListener("load", () => {
-    const element = document.querySelector("#search-job");
-    const channel_id = document.querySelector('#channel-id');
-    element.addEventListener("ajax:success", (event) => {
-      channel_id.innerHTML = 'Loading. Please wait.......';
-    });
+  document.getElementById("search_button").addEventListener("click", function() {
+    document.getElementById("channel-id").innerHTML = "Loading. Please wait.....";
   });
- </script>
+</script>
