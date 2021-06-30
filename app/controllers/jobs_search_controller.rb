@@ -1,5 +1,4 @@
 class JobsSearchController < ApplicationController
-
   def search
     request.xhr? ? JobsSearchJob.perform_later(search_params) : set_channel_id
   end
@@ -14,5 +13,4 @@ class JobsSearchController < ApplicationController
   def set_channel_id
     @channel_id = SecureRandom.alphanumeric(8)
   end
-
 end

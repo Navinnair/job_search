@@ -21,6 +21,6 @@ class JobsSearchJob < ApplicationJob
   def render(query)
     Rails.cache.fetch(query, expires_in: 5.minutes) do
       JobListSerializer.render_as_json(job_list(query))
-    end  
+    end
   end
 end

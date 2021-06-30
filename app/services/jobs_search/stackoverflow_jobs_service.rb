@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StackoverflowJobsService < ApplicationService
   require 'open-uri'
   require 'rss'
@@ -15,8 +17,8 @@ class StackoverflowJobsService < ApplicationService
   # Service entry point
   def call
     search_and_fetch_jobs
-  rescue Exception => exception
-    raise exception.message
+  rescue Exception => e
+    raise e.message
   end
 
   private
@@ -32,5 +34,4 @@ class StackoverflowJobsService < ApplicationService
   def target_url_with_query
     "#{TARGET_URL}q=#{query}&l=#{LOCATION}"
   end
-
 end
