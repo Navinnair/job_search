@@ -27,7 +27,7 @@ RUN gem install bundler -v 2.1.4
 
 WORKDIR /app
 COPY Gemfile Gemfile.lock ./
-RUN bundle check || bundle install
+RUN bundle
 COPY package.json yarn.lock ./
 RUN yarn install --check-files
 COPY . ./
